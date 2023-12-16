@@ -16,19 +16,21 @@ struct Person {
     }
     
     static func getPerson() -> [Person] {
-        let names = ["Emma", "Liam", "William","Sophia", "James",
-                     "Mia", "Jacob", "Abigail", "Emily", "Ethan"]
-        let surnames = ["Smith", "Johnson", "Williams", "Jones", "Brown",
-                        "Davis", "Miller", "Wilson", "Moore", "Taylor"]
+        let data = DataStore()
+        let names = Array(Set(data.names))
+        let surnames = Array(Set(data.surnames))
+        let emails = Array(Set(data.emails))
+        let phones = Array(Set(data.phones))
+        
         var persons: [Person] = []
         
-        for (name, surname) in zip(Set(names), Set(surnames)) {
+        for i in 0..<names.count {
             persons.append(
                 Person(
-                    name: name,
-                    surname: surname,
-                    email: "\(name)\(surname)@email.com".lowercased(),
-                    phone: String(Int.random(in: 1000000...9999999))
+                    name: names[i],
+                    surname: surnames[i],
+                    email: emails[i],
+                    phone: phones[i]
                 )
             )
         }
